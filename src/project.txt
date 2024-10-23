@@ -1,0 +1,31 @@
+BankingSystem/
+ ├── src/
+ │   └── main/
+ │       ├── model/
+ │       │    ├── BankAccount.java
+ │       │    ├── Customer.java
+ │       │    ├── Employee.java
+ │       │    ├── Transaction.java
+ │       │    └── User.java
+ │       │    
+ │       ├── service/
+ │       │    ├── BankAccountService.java
+ │       │    ├── CustomerService.java
+ │       │    ├── EmployeeService.java
+ │       │    ├── TransactionService.java
+ │       │    └── UserService.java
+ │       │    
+ │       ├── database/
+ │       │    ├── DataStore.java
+ │       │    ├── DBConnection.java
+ │       │    └── DatabaseHandler.java
+ │       │    
+ │       ├── utils/
+ │       │    ├── InputValidator.java
+ │       │    ├── DateUtils.java
+ │       │    └── ConsoleUtils.java
+ │       │    
+ │       └── main/
+ │            └── BankingSystem.java
+ │
+ └── README.md
