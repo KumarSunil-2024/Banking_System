@@ -46,13 +46,28 @@ public class DatabaseHandler {
     }
 
     public static void addAccount(BankAccount account) {
-        String query = "INSERT INTO accounts (account_id, customer_id, balance, account_type) VALUES (?, ?, ?, ?)";
-        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setString(1, account.getAccountId());
-            pstmt.setString(2, account.getCustomerId());
-            pstmt.setDouble(3, account.getBalance());
-            pstmt.setString(4, account.getAccountType());
-            pstmt.executeUpdate();
+        String checkQuery = "SELECT account_id FROM accounts WHERE account_id = ?";
+        String insertQuery = "INSERT INTO accounts (account_id, customer_id, balance, account_type) VALUES (?, ?, ?, ?)";
+        
+        try (PreparedStatement checkStmt = conn.prepareStatement(checkQuery)) {
+            checkStmt.setString(1, account.getAccountId());
+            ResultSet rs = checkStmt.executeQuery();
+            
+           
+            if (rs.next()) {
+                System.out.println("Error: Account with ID " + account.getAccountId() + " already exists.");
+                return;
+            }
+            
+           
+            try (PreparedStatement pstmt = conn.prepareStatement(insertQuery)) {
+                pstmt.setString(1, account.getAccountId());
+                pstmt.setString(2, account.getCustomerId());
+                pstmt.setDouble(3, account.getBalance());
+                pstmt.setString(4, account.getAccountType());
+                pstmt.executeUpdate();
+                System.out.println("Account created successfully!");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
